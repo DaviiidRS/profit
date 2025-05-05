@@ -1,4 +1,5 @@
 package com.example.profit.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,8 +22,16 @@ public class Receta {
     private Long proteinas;
     private Long carbohidratos;
     private Long grasas;
-    private Long categoria_id;
-    private String objetivoFitness;
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    @JsonIgnore
+    private Categoria categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "id_objetivo")
+    @JsonIgnore
+    private Objetivo objetivo;
 
     @OneToMany(mappedBy = "receta")
     private List<RecetaIngrediente> recetaIngredientes;
