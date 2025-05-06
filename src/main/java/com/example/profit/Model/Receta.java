@@ -13,7 +13,6 @@ import java.util.List;
 public class Receta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id_receta;
     private String receta;
     private String descripcion;
@@ -26,14 +25,13 @@ public class Receta {
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
-    @JsonIgnore
     private Categoria categoria;
 
     @ManyToOne
     @JoinColumn(name = "id_objetivo")
-    @JsonIgnore
     private Objetivo objetivo;
 
-    @OneToMany(mappedBy = "receta")
+    @OneToMany(mappedBy = "receta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<RecetaIngrediente> recetaIngredientes;
 }

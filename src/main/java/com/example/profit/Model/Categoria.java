@@ -15,12 +15,11 @@ import java.util.List;
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id_categoria;
 
     private String categoria;
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Categoria> detalleVentas;
+    private List<Receta> recetas;
 }

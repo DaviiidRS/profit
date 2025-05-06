@@ -13,17 +13,14 @@ import lombok.NoArgsConstructor;
 public class RecetaIngrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id_recetaIngrediente;
 
     @ManyToOne
     @JoinColumn(name = "id_receta")
-    @JsonIgnore
     private Receta receta;
 
     @ManyToOne
     @JoinColumn(name = "id_ingrediente")
-    @JsonIgnore
     private Ingrediente ingrediente;
 
     private Long cantidad;

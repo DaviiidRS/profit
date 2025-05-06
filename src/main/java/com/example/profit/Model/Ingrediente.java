@@ -15,7 +15,6 @@ import java.util.List;
 public class Ingrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id_ingrediente;
     private String ingrediente;
     private String unidad;
