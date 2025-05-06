@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class RecetaIngrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id_recetaIngrediente;
 
     @ManyToOne

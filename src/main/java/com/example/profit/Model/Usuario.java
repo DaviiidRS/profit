@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id_usuario;
 
     private String usuario;
@@ -20,8 +21,7 @@ public class Usuario {
     private String contrasena;
 
     @ManyToOne
-    @JoinColumn(name = "id_objetivo")
-    @JsonIgnore
+    @JoinColumn(name = "id_objetivo", nullable = false)
     private Objetivo objetivo;
 
     private Long caloria_diarias;

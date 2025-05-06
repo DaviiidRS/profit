@@ -15,11 +15,12 @@ import java.util.List;
 public class Objetivo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id_objetivo;
 
     private String objetivo;
 
     @OneToMany(mappedBy = "objetivo", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Objetivo> detalleVentas;
+    private List<Objetivo> objetivos;
 }
