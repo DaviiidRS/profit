@@ -32,6 +32,5 @@ public class Receta {
     private Objetivo objetivo;
 
     @OneToMany(mappedBy = "receta", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<RecetaIngrediente> recetaIngredientes;
 }
