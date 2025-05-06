@@ -19,7 +19,7 @@ public class Ingrediente {
     private String ingrediente;
     private String unidad;
 
-    @OneToMany(mappedBy = "ingrediente")
+    @OneToMany(mappedBy = "ingrediente", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<RecetaIngrediente> recetaIngredientes;
 

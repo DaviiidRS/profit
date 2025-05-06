@@ -33,6 +33,6 @@ public class Receta {
     @JsonIgnore
     private Objetivo objetivo;
 
-    @OneToMany(mappedBy = "receta")
+    @OneToMany(mappedBy = "receta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecetaIngrediente> recetaIngredientes;
 }
