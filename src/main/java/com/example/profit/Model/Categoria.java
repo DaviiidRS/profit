@@ -21,5 +21,5 @@ public class Categoria {
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Categoria> detalleVentas;
+    private List<Receta> recetas;
 }

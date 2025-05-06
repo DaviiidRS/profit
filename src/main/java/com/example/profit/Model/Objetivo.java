@@ -21,5 +21,9 @@ public class Objetivo {
 
     @OneToMany(mappedBy = "objetivo", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Objetivo> detalleVentas;
+    private List<Receta> recetas;
+
+    @OneToMany(mappedBy = "objetivo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Usuario> usuarios;
 }

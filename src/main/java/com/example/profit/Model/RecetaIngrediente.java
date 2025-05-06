@@ -17,12 +17,10 @@ public class RecetaIngrediente {
 
     @ManyToOne
     @JoinColumn(name = "id_receta")
-    @JsonIgnore
     private Receta receta;
 
     @ManyToOne
     @JoinColumn(name = "id_ingrediente")
-    @JsonIgnore
     private Ingrediente ingrediente;
 
     private Long cantidad;
