@@ -25,12 +25,10 @@ public class Receta {
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
-    @JsonIgnore
     private Categoria categoria;
 
     @ManyToOne
     @JoinColumn(name = "id_objetivo")
-    @JsonIgnore
     private Objetivo objetivo;
 
     @OneToMany(mappedBy = "receta", cascade = CascadeType.ALL, orphanRemoval = true)

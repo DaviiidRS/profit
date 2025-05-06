@@ -20,8 +20,7 @@ public class Usuario {
     private String contrasena;
 
     @ManyToOne
-    @JoinColumn(name = "id_objetivo")
-    @JsonIgnore
+    @JoinColumn(name = "id_objetivo", nullable = false)
     private Objetivo objetivo;
 
     private Long caloria_diarias;
