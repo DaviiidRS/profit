@@ -53,4 +53,10 @@ public class CategoriaService {
             throw new RuntimeException("Error al buscar categoría por ID " + e.getMessage(), e);
         }
     }
+    public Categoria actualizar(Long id_categoria, Categoria categoria) {
+        if (!categoriaRepository.existsById(id_categoria)) {
+            throw new IllegalArgumentException("No se encontró una categoría con el id " + id_categoria);
+        }
+        return categoriaRepository.save(categoria);
+    }
 }

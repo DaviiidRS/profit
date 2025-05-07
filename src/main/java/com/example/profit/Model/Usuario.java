@@ -21,7 +21,18 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "id_objetivo", nullable = false)
+    @JsonIgnore
     private Objetivo objetivo;
 
+    @Transient
+    private Long id_objetivo;
+
     private Long caloria_diarias;
+
+    @PostLoad
+    public void cargarIds() {
+        if (objetivo != null) {
+            this.id_objetivo = objetivo.getId_objetivo();
+        }
+    }
 }

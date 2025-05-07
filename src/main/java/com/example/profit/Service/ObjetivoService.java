@@ -53,4 +53,10 @@ public class ObjetivoService {
             throw new RuntimeException("Error al buscar objetivo por ID " + e.getMessage(), e);
         }
     }
+    public Objetivo actualizar(Long id_objetivo, Objetivo objetivo) {
+        if (!objetivoRepository.existsById(id_objetivo)) {
+            throw new IllegalArgumentException("No se encontró un objetivo con el id " + id_objetivo);
+        }
+        return objetivoRepository.save(objetivo);
+    }
 }

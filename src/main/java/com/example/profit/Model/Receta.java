@@ -25,12 +25,32 @@ public class Receta {
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
+    @JsonIgnore
     private Categoria categoria;
+
+    @Transient
+    private Long id_categoria;
 
     @ManyToOne
     @JoinColumn(name = "id_objetivo")
+    @JsonIgnore
     private Objetivo objetivo;
 
+    @Transient
+    private Long id_objetivo;
+
     @OneToMany(mappedBy = "receta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<RecetaIngrediente> recetaIngredientes;
+
+    @PostLoad
+    public void asignarIds() {
+        if (categoria != null) {
+            this.id_categoria = categoria.getId_categoria();
+        }
+        if (objetivo != null) {
+            this.id_objetivo = objetivo.getId_objetivo();
+        }
+    }
+
 }
