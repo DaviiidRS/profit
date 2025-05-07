@@ -38,4 +38,15 @@ public class RecetaController {
         recetaService.eliminar(id_receta);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/actualizar/{id_receta}")
+    public ResponseEntity<Receta> actualizar(@PathVariable Long id_receta, @RequestBody Receta receta) {
+        receta.setId_receta(id_receta);
+        Receta recetaActualizada = recetaService.actualizar(id_receta, receta);
+        return ResponseEntity.ok(recetaActualizada);
+    }
+
+    @GetMapping("/filtrarPorObjetivo")
+    public ResponseEntity<List<Receta>> filtrarPorObjetivo(@RequestParam Long id_objetivo) {
+        return ResponseEntity.ok(recetaService.filtrarPorObjetivoId(id_objetivo));
+    }
 }

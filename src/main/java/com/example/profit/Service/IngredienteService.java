@@ -53,4 +53,10 @@ public class IngredienteService {
             throw new RuntimeException("Error al buscar ingrediente por ID " + e.getMessage(), e);
         }
     }
+    public Ingrediente actualizar(Long id_ingrediente, Ingrediente ingrediente) {
+        if (!ingredienteRepository.existsById(id_ingrediente)) {
+            throw new IllegalArgumentException("No se encontró un ingrediente con el id " + id_ingrediente);
+        }
+        return ingredienteRepository.save(ingrediente);
+    }
 }

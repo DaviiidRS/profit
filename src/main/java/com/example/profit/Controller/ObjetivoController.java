@@ -38,4 +38,10 @@ public class ObjetivoController {
         objetivoService.eliminar(id_objetivo);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/actualizar/{id_objetivo}")
+    public ResponseEntity<Objetivo> actualizar(@PathVariable Long id_objetivo, @RequestBody Objetivo objetivo) {
+        objetivo.setId_objetivo(id_objetivo);
+        Objetivo objetivoActualizado = objetivoService.actualizar(id_objetivo, objetivo);
+        return ResponseEntity.ok(objetivoActualizado);
+    }
 }

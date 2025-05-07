@@ -1,6 +1,8 @@
 package com.example.profit.Service;
 
+import com.example.profit.Model.Objetivo;
 import com.example.profit.Model.Usuario;
+import com.example.profit.Repository.ObjetivoRepository;
 import com.example.profit.Repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +12,11 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
+    private final ObjetivoRepository objetivoRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, ObjetivoRepository objetivoRepository) {
         this.usuarioRepository = usuarioRepository;
+        this.objetivoRepository = objetivoRepository;
     }
 
     public Usuario guardar(Usuario usuario) {
@@ -52,5 +56,17 @@ public class UsuarioService {
         } catch (Exception e) {
             throw new RuntimeException("Error al buscar usuario por ID " + e.getMessage(), e);
         }
+    }
+
+    public Usuario actualizar(Long id_usuario, Usuario usuario) {
+        if (!usuarioRepository.existsById(id_usuario)) {
+            throw new IllegalArgumentException("No se encontró un usuario con el id " + id_usuario);
+        }
+        if (usuario.getId_objetivo() != null) {
+            Objetivo objetivo = objetivoRepository.findById(usuario.getId_objetivo())
+                    .orElseThrow(() -> new IllegalArgumentException("No se encontró un objetivo con el id " + usuario.getId_objetivo()));
+            usuario.setObjetivo(objetivo);
+        }
+        return usuarioRepository.save(usuario);
     }
 }
