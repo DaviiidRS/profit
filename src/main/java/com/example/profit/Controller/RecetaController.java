@@ -1,6 +1,12 @@
 package com.example.profit.Controller;
 
+import com.example.profit.Model.Categoria;
+import com.example.profit.Model.Objetivo;
 import com.example.profit.Model.Receta;
+import com.example.profit.Repository.CategoriaRepository;
+import com.example.profit.Repository.ObjetivoRepository;
+import com.example.profit.Service.CategoriaService;
+import com.example.profit.Service.ObjetivoService;
 import com.example.profit.Service.RecetaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,13 +17,28 @@ import java.util.List;
 @RequestMapping("/receta")
 public class RecetaController {
     private final RecetaService recetaService;
+    private final ObjetivoRepository objetivoRepository;
+    private final CategoriaRepository categoriaRepository;
 
-    public RecetaController(RecetaService recetaService) {
+    public RecetaController(RecetaService recetaService, ObjetivoRepository objetivoRepository, CategoriaRepository categoriaRepository) {
         this.recetaService = recetaService;
+        this.objetivoRepository = objetivoRepository;
+        this.categoriaRepository = categoriaRepository;
     }
 
     @PostMapping("/guardar")
     public ResponseEntity<Receta> guardarReceta(@RequestBody Receta receta) {
+        // Buscar y asignar objetivo
+        Objetivo objetivo = objetivoRepository.findById(receta.getId_objetivo())
+                .orElseThrow(() -> new RuntimeException("Objetivo no encontrado con id: " + receta.getId_objetivo()));
+        receta.setObjetivo(objetivo);
+
+        // Buscar y asignar categoria
+        Categoria categoria = categoriaRepository.findById(receta.getId_categoria())
+                .orElseThrow(() -> new RuntimeException("categoria no encontrada con id: " + receta.getId_categoria()));
+        receta.setCategoria(categoria);
+
+        // Guardar Receta
         return ResponseEntity.ok(recetaService.guardar(receta));
     }
 
